@@ -142,3 +142,11 @@
 | /product        | GET    | True                    | -                      | -                                            | get all Product              | ```[product] ```      |
 | /product        | GET    | True                    | Request_Param          | name                                         | get Product name contain     | ```product```         | 
 | /product/detail | GET    | True                    | Request_Param          | product (ID)                                 | get Product Detail from Id   | ```productDetail```   |    
+
+## API Arch Spec Document
+
+```mermaid
+flowchart LR
+   Controller <---> Service <---> Repository <---> Database[(Database)]
+   Service <---> Gateway --> External_Service
+```
