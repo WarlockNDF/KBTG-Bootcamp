@@ -143,7 +143,7 @@
 | /product        | GET    | True                    | Request_Param          | name                                         | get Product name contain     | ```product```         | 
 | /product/detail | GET    | True                    | Request_Param          | product (ID)                                 | get Product Detail from Id   | ```productDetail```   |    
 
-## API Arch Spec Document
+## API Architecture Spec Document
 
 ```mermaid
 flowchart LR
