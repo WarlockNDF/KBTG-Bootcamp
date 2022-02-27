@@ -23,23 +23,9 @@ public class ResponseTemplate {
                 .build();
     }
 
-}
-
-@Data
-@Builder
-class ResponseModel {
-
-    private Integer status;
-    private String message;
-    private Object data;
+    public ResponseModel getResponseModel() {
+        return new ResponseModel();
+    }
 
 }
 
-@Data
-@Builder
-class ExceptionModel {
-
-    private Integer status;
-    private String message;
-
-}

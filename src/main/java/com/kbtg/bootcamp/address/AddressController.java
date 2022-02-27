@@ -24,33 +24,33 @@ public class AddressController {
     }
 
     //TODO CHANGE TO BEARER TOKEN THEN USE EXTRACTED PAYLOAD AS USER
-    @PostMapping()
+    @PostMapping("/{user}")
     @ResponseBody()
     @ResponseStatus(HttpStatus.CREATED)
-    public Object postUserAddress(@RequestBody() AddressRequestDTO address, @RequestParam(name = "user") Integer userId) {
+    public Object postUserAddress(@RequestBody() AddressRequestDTO address, @PathVariable Integer user) {
         return responseTemplate.createResponse(
                 HttpStatus.OK,"User Address Had Been Added",
-                addressService.saveUserAddress(address,userId)
+                addressService.saveUserAddress(address,user)
         );
     }
 
-    @PatchMapping()
+    @PatchMapping("/{user}")
     @ResponseBody()
     @ResponseStatus(HttpStatus.OK)
-    public Object putUserAddress(@RequestBody() AddressRequestDTO address, @RequestParam(name = "user") Integer userId){
+    public Object putUserAddress(@RequestBody() AddressRequestDTO address, @PathVariable Integer user){
         return responseTemplate.createResponse(
                 HttpStatus.OK,"User Address Had Been Modify",
-                addressService.updateUserAddress(address, userId)
+                addressService.updateUserAddress(address, user)
         );
     }
 
-    @DeleteMapping()
+    @DeleteMapping("/{user}")
     @ResponseBody()
     @ResponseStatus(HttpStatus.OK)
-    public Object deleteUserAddress(@RequestParam(name = "id") Integer addressId, @RequestParam(name = "user") Integer userId) {
+    public Object deleteUserAddress(@RequestParam(name = "id") Integer addressId, @PathVariable Integer user) {
         return responseTemplate.createResponse(
                 HttpStatus.OK,"User Address Removed",
-                addressService.deleteUserAddress(addressId, userId)
+                addressService.deleteUserAddress(addressId, user)
         );
     }
 
