@@ -27,7 +27,7 @@ public class AddressController {
     @PostMapping()
     @ResponseBody()
     @ResponseStatus(HttpStatus.CREATED)
-    public Object postUserAddress(AddressRequestDTO address, @RequestParam(name = "user") Integer userId) {
+    public Object postUserAddress(@RequestBody() AddressRequestDTO address, @RequestParam(name = "user") Integer userId) {
         return responseTemplate.createResponse(
                 HttpStatus.OK,"User Address Had Been Added",
                 addressService.saveUserAddress(address,userId)
@@ -37,7 +37,7 @@ public class AddressController {
     @PatchMapping()
     @ResponseBody()
     @ResponseStatus(HttpStatus.OK)
-    public Object putUserAddress(AddressRequestDTO address, @RequestParam(name = "user") Integer userId){
+    public Object putUserAddress(@RequestBody() AddressRequestDTO address, @RequestParam(name = "user") Integer userId){
         return responseTemplate.createResponse(
                 HttpStatus.OK,"User Address Had Been Modify",
                 addressService.updateUserAddress(address, userId)
