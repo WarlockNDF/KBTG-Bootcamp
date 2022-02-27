@@ -1,20 +1,11 @@
 package com.kbtg.bootcamp.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kbtg.bootcamp.exception.exceptions.InternalProcessException;
-import com.kbtg.bootcamp.product.dto.ProductResponseDTO;
-import com.kbtg.bootcamp.product.model.ProductSize;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Arrays;
-import java.util.List;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity()
 @Getter
@@ -31,5 +22,9 @@ public class Product {
     private String productSizeList;
     private double discountPercent;
     private boolean isDiscountActive = false;
+
+    @OneToMany(mappedBy = "products")
+    @JsonBackReference
+    private Set<BasketItems> baskets;
 
 }

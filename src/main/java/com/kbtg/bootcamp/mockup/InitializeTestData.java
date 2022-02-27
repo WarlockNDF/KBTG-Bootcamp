@@ -2,6 +2,8 @@ package com.kbtg.bootcamp.mockup;
 
 
 import com.kbtg.bootcamp.address.AddressService;
+import com.kbtg.bootcamp.basket.BasketService;
+import com.kbtg.bootcamp.entities.Basket;
 import com.kbtg.bootcamp.entities.Product;
 import com.kbtg.bootcamp.entities.User;
 import com.kbtg.bootcamp.entities.UserAddress;
@@ -22,6 +24,7 @@ public class InitializeTestData {
     private final UserService userService;
     private final AddressService addressService;
     private final ProductService productService;
+    private final BasketService basketService;
 
 
     public void init(){
@@ -32,6 +35,7 @@ public class InitializeTestData {
     private void starter() {
         User user = userService.getRepo().save(User.builder().firstName("Tim").lastName("Dev").build());
         UserAddress userAddress = new UserAddress();
+        Basket basket = new Basket();
         userAddress.setUser(user);
         userAddress.setReceiverEmail("test@email.com");
         userAddress.setReceiverFullName("Tim W");
@@ -39,6 +43,8 @@ public class InitializeTestData {
         userAddress.setReceiverPostalCode("10250");
         userAddress.setArea("Bangkapi");
         userAddress.setProvince("BKK");
+        basket.setUser(user);
+        basketService.getRepo().save(basket);
         addressService.getRepo().save(userAddress);
     }
 

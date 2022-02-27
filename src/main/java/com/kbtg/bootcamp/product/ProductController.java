@@ -46,24 +46,24 @@ public class ProductController {
         );
     }
 
-    @PostMapping()
-    @ResponseBody()
-    @ResponseStatus(HttpStatus.CREATED)
-    public Object postProduct(@RequestBody()ProductDTO reqProduct, @RequestParam(name = "user") Integer userId) {
-        return responseTemplate.createResponse(
-                HttpStatus.OK, "Product Had been Registered To System",
-                productService.saveProductToSystem(reqProduct, userId)
-        );
-    }
+//    @PostMapping()
+//    @ResponseBody()
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Object postProduct(@RequestBody()ProductDTO reqProduct, @RequestParam(name = "user") Integer userId) {
+//        return responseTemplate.createResponse(
+//                HttpStatus.OK, "Product Had been Registered To System",
+//                productService.saveProductToSystem(reqProduct, userId)
+//        );
+//    }
 
-    @PatchMapping()
-    @ResponseBody()
-    @ResponseStatus(HttpStatus.OK)
-    public  Object patchProduct(@RequestBody() ProductDTO reqProduct, @RequestParam( name = "user" ) Integer userId) {
-        return responseTemplate.createResponse(
-          HttpStatus.OK,"Product has been Updated To The System",
-                productService.updateProductToSystem(reqProduct, userId)
-        );
-    }
+//    @PatchMapping()
+//    @ResponseBody()
+//    @ResponseStatus(HttpStatus.OK)
+//    public  Object patchProduct(@RequestBody() ProductDTO reqProduct, @RequestParam( name = "user" ) Integer userId) {
+//        return responseTemplate.createResponse(
+//          HttpStatus.OK,"Product has been Updated To The System",
+//                productService.updateProductToSystem(reqProduct, userId)
+//        );
+//    }
 
 }

@@ -21,8 +21,11 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "user")
     @JsonBackReference
     private Set<UserAddress> userAddresses;
+
+    @OneToOne(mappedBy = "user")
+    private Basket basket;
 
 }

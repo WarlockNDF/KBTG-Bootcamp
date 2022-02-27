@@ -7,6 +7,7 @@ import com.kbtg.bootcamp.exception.exceptions.NoSuchProductException;
 import com.kbtg.bootcamp.exception.exceptions.ProductNotFoundException;
 import com.kbtg.bootcamp.exception.exceptions.UserNotFoundException;
 import com.kbtg.bootcamp.product.dto.ProductDTO;
+import com.kbtg.bootcamp.product.dto.ProductDetailedResponseDTO;
 import com.kbtg.bootcamp.product.dto.ProductResponseDTO;
 import com.kbtg.bootcamp.users.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -25,29 +25,34 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final UserService userService;
+    private List<ProductResponseDTO> responseProductDTOS;
 
     public List<ProductResponseDTO> getAllProduct(){
-        List<ProductResponseDTO> responseDTOS = new ArrayList<>();
+        responseProductDTOS = new ArrayList<>();
         productRepository.findAll().forEach(product -> {
-            responseDTOS.add(new ProductResponseDTO()._ToResponseDTO(product));
+            responseProductDTOS.add(new ProductResponseDTO()._ToResponseDTO(product));
         });
-        return responseDTOS;
+        return responseProductDTOS;
     }
 
-    public List<Product> getProductFromName(String name){
-        List<Product> product = productRepository.findAllByProductName(name);
-        if (product.isEmpty()){
+    public List<ProductResponseDTO> getProductFromName(String name){
+        responseProductDTOS = new ArrayList<>();
+        List<Product> productList = productRepository.findAllByProductName(name);
+        if (productList.isEmpty()){
             throw new ProductNotFoundException("No Such Product");
         }
-        return product;
+        productList.forEach(product -> {
+            responseProductDTOS.add(new ProductResponseDTO()._ToResponseDTO(product));
+        });
+        return responseProductDTOS;
     }
 
-    public Product getProductDetailedFromId(Integer id){
+    public ProductDetailedResponseDTO getProductDetailedFromId(Integer id){
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty()){
             throw new ProductNotFoundException("No Such Product");
         }
-        return product.get();
+        return new ProductDetailedResponseDTO()._ToResponseDTO(product.get());
     }
 
     public ProductDTO saveProductToSystem(ProductDTO reqProduct, Integer userId) {
@@ -73,7 +78,5 @@ public class ProductService {
         }
         return requestDTO.toEntity();
     }
-
-
 
 }
