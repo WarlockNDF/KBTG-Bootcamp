@@ -1,6 +1,9 @@
 package com.kbtg.bootcamp;
 
-import com.kbtg.bootcamp.entities.UserEntities;
+import com.kbtg.bootcamp.address.AddressService;
+import com.kbtg.bootcamp.entities.User;
+import com.kbtg.bootcamp.entities.UserAddress;
+import com.kbtg.bootcamp.mockup.InitializeTestData;
 import com.kbtg.bootcamp.users.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,13 +17,13 @@ import javax.annotation.PostConstruct;
 @Slf4j
 public class BootcampApplication {
 
-	private final UserService userService;
+	private final InitializeTestData testData;
 
 	//TODO SHOULD NOT BE ON PRODUCTION
 	@PostConstruct
 	private void afterBoot(){
 		log.info("Initialize MockUP Data");
-		userService.getRepo().save(UserEntities.builder().firstName("Tim").lastName("Dev").build());
+		testData.init();
 		log.info("End MockUP Data");
 	}
 
