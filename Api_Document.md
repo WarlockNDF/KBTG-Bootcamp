@@ -128,25 +128,17 @@
 > ### Document Reading Tips
 > **Response** &rarr; ชื่อของ ประเภท Object ที่จะคืนกลับมา ซึ่ง ```[]``` หมายถึงคืนมาในรูปของ Array<br><br>
 > **Independent Transaction** &rarr; ใน Process นั้นควรเป็น Nested Transaction ไหม<br><br>
-> **NOTE** &rarr; ตัวของ Authorization ต่างๆจะนำมาใช้หลัง WorkShop
+> **NOTE** &rarr; ตัวของ Authorization ต่างๆจะนำมาใช้หลัง WorkShop ฯตอนนี้จะใช้เป้น RequestParam/ String Query ไปก่อน
+> **DEVELOPMENT NOTE** OrderFlow กำลัง In Progress
 
-| Path            | Method | Independent Transaction | Parameter_Type         | Parameter                                    | Description                  | Response              |
-|-----------------|--------|-------------------------|------------------------|----------------------------------------------|------------------------------|-----------------------|
-| /user           | GET    | True                    | Header                 | Authorization                                | get User Info                | ```User```            |
-| /user/basket    | POST   | True                    | Header & Request_Param | Authorization & product (ID)                 | add Product in User Basket   | ```basketProduct```   |
-| /user/basket    | GET    | True                    | Header                 | Authorization                                | get Product in User Basket   | ```[basketProduct]``` |
-| /user/address   | POST   | True                    | Header & Body: JSON    | Authorization & ```Address_Request_Object``` | add User Address             | ```userAddress```     |
-| /user/address   | GET    | True                    | Header                 | Authorization                                | get User Address             | ```[userAddress]```   |
-| /user/order     | POST   | False                   | Header & Body: JSON    | Authorization & ```Order_Requset_Objects ``` | add Purchase to User Order   | ```order```           |
-| /user/order     | GET    | True                    | Header & Request_Param | Authorization & issue (orderID)              | get OrderDetailed as Summary | ```OrderDetailed```   |
-| /product        | GET    | True                    | -                      | -                                            | get all Product              | ```[product] ```      |
-| /product        | GET    | True                    | Request_Param          | name                                         | get Product name contain     | ```product```         | 
-| /product/detail | GET    | True                    | Request_Param          | product (ID)                                 | get Product Detail from Id   | ```productDetail```   |    
+| Path                 | Method | Independent Transaction | Parameter_Type      | Parameter                                    | Description                | Response               |
+|----------------------|--------|-------------------------|---------------------|----------------------------------------------|----------------------------|------------------------|
+| /user                | GET    | True                    | Header              | Authorization                                | get User Info              | ```User```             |
+| /user/basket         | POST   | True                    | Header & Body: JSON | Authorization & product (ID)                 | add Product in User Basket | ```basketProduct```    |
+| /user/basket         | GET    | True                    | Header              | Authorization                                | get Product in User Basket | ```basketProducts[]``` |
+| /user/address        | POST   | True                    | Header & Body: JSON | Authorization & ```Address_Request_Object``` | add User Address           | ```userAddress```      |
+| /user/address        | GET    | True                    | Header              | Authorization                                | get User Address           | ```userAddresses[]```  |
+| /product             | GET    | True                    | -                   | -                                            | get all Product            | ```products[] ```      |
+| /product             | GET    | True                    | Request_Param       | name                                         | get Product name contain   | ```product```          | 
+| /product/detail/{id} | GET    | True                    | Path_Variable       | product (ID)                                 | get Product Detail from Id | ```productDetail```    |    
 
-## API Architecture Spec Document
-
-```mermaid
-flowchart LR
-   Controller <---> Service <---> Repository <---> Database[(Database)]
-   Service <---> Gateway --> External_Service
-```
