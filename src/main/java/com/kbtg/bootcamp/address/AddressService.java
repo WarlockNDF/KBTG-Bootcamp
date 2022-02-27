@@ -23,7 +23,7 @@ public class AddressService {
     public List<UserAddress> getListOfAddress(Integer id) {
         List<UserAddress> userAddressList = addressRepository.findAllByUserId(id);
         if (userAddressList.isEmpty()){
-            return new ArrayList<>();
+            throw new UserNotFoundException("User Not Exist In the System");
         }
         return userAddressList;
     }

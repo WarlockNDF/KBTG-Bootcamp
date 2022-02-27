@@ -23,6 +23,8 @@ public class ProductDTO {
     private double productStar;
     private int productStock;
     private List<ProductSize> productSizeList;
+    private double discountPercent;
+    private boolean isDiscountActive;
 
     public Product toEntity(){
         Product product = new Product();
@@ -31,6 +33,8 @@ public class ProductDTO {
         product.setProductPrice(this.productPrice);
         product.setProductStar(this.productStar);
         product.setProductStock(this.productStock);
+        product.setDiscountPercent(this.discountPercent);
+        product.setDiscountActive(this.isDiscountActive);
         try {
             product.setProductSizeList(new ObjectMapper().writeValueAsString(this.productSizeList));
         } catch (JsonProcessingException e){

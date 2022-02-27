@@ -3,6 +3,8 @@ package com.kbtg.bootcamp.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kbtg.bootcamp.exception.exceptions.InternalProcessException;
+import com.kbtg.bootcamp.product.dto.ProductResponseDTO;
 import com.kbtg.bootcamp.product.model.ProductSize;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +29,7 @@ public class Product {
     private double productStar;
     private int productStock;
     private String productSizeList;
-
-
+    private double discountPercent;
+    private boolean isDiscountActive = false;
 
 }

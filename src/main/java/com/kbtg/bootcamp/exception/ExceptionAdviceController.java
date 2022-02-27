@@ -51,4 +51,11 @@ public class ExceptionAdviceController {
         return responseTemplate.createExceptionResponse(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
+    @ExceptionHandler(InternalProcessException.class)
+    @ResponseBody()
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Object internalProcessFailed(InternalProcessException e) {
+        return  responseTemplate.createExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+    }
+
 }

@@ -7,22 +7,31 @@ import com.kbtg.bootcamp.exception.exceptions.NoSuchProductException;
 import com.kbtg.bootcamp.exception.exceptions.ProductNotFoundException;
 import com.kbtg.bootcamp.exception.exceptions.UserNotFoundException;
 import com.kbtg.bootcamp.product.dto.ProductDTO;
+import com.kbtg.bootcamp.product.dto.ProductResponseDTO;
 import com.kbtg.bootcamp.users.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
     private final UserService userService;
 
-    public List<Product> getAllProduct(){
-        return productRepository.findAll();
+    public List<ProductResponseDTO> getAllProduct(){
+        List<ProductResponseDTO> responseDTOS = new ArrayList<>();
+        productRepository.findAll().forEach(product -> {
+            responseDTOS.add(new ProductResponseDTO()._ToResponseDTO(product));
+        });
+        return responseDTOS;
     }
 
     public List<Product> getProductFromName(String name){
